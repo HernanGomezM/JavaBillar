@@ -30,14 +30,14 @@ public class ServeUsua extends HttpServlet {
     private void RegiUsua(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             PrintWriter out = response.getWriter();
-            Usuarios l = new Usuarios(request.getParameter("Documento"), request.getParameter("Nombres"),request.getParameter("Apellidos"),request.getParameter("Direccion"),request.getParameter("Email"),request.getParameter("Perfil"));
+            Usuarios usua = new Usuarios(request.getParameter("Documento"), request.getParameter("Nombres"),request.getParameter("Apellidos"),request.getParameter("Direccion"),request.getParameter("Email"),request.getParameter("Perfil"));
             
             Session s = HibernateUtil.getSessionFactory().openSession();
             Transaction tx = s.beginTransaction();
-            s.save(l);
+            s.save(usua);
             //Obtenemos la session del cliente
             HttpSession sh = request.getSession();
-            sh.setAttribute("Usuarios", l);
+            sh.setAttribute("Usuarios", usua);
             tx.commit();
             s.close();
             response.sendRedirect("Usuarios.html");
@@ -87,14 +87,17 @@ public class ServeUsua extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        
         if(request.getParameter("u").equalsIgnoreCase("RegiUsua")){
+            
             RegiUsua(request,response);
         }
         
-        else if(request.getParameter("u").equalsIgnoreCase("VerUsua")){
+        else if(request.getParameter("u").equalsIgnoreCase("VerUsua"))
+        {
             VerUsua(request,response);
+            
         }else if(request.getParameter("u").equalsIgnoreCase("update")){
+            
             updateUsuario(request,response); 
         }
     }

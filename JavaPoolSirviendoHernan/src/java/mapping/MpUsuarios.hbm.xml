@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="models.Usuarios">
-        <id name="IdUsuarios" table="Usuarios">
+    <class name="models.Usuarios" table="Usuarios">
+        <id name="IdUsuarios" column="IdUsuarios" >
             <generator class="identity"/>
         </id>
         <property name="Documento" column="Documento" type="string"/>

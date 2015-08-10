@@ -21,13 +21,13 @@
    <!-- Background slider -->
  	<div class="slider">
  	      <ul id="cbp-bislideshow" class="cbp-bislideshow">
-					<li><img src="Diseño/images/1.jpg" alt="image01"/></li>
-					<li><img src="Diseño/images/2.jpg" alt="image02"/></li>
-					<li><img src="Diseño/images/3.jpg" alt="image03"/></li>
-					<li><img src="Diseño/images/4.jpg" alt="image04"/></li>
-					<li><img src="Diseño/images/5.jpg" alt="image05"/></li>
-					<li><img src="Diseño/images/6.jpg" alt="image06"/></li>
-				</ul>    
+                    <li><img src="Diseño/images/1.jpg" alt="image01"/></li>
+      			<li><img src="Diseño/images/2.jpg" alt="image02"/></li>
+			<li><img src="Diseño/images/3.jpg" alt="image03"/></li>
+			<li><img src="Diseño/images/4.jpg" alt="image04"/></li>
+			<li><img src="Diseño/images/5.jpg" alt="image05"/></li>
+			<li><img src="Diseño/images/6.jpg" alt="image06"/></li>
+		</ul>    
 	   <script src="Diseño/js/jquery.imagesloaded.min.js"></script>
 		<script src="Diseño/js/cbpBGSlideshow.min.js"></script>
 		<script>
