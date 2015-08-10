@@ -9,5 +9,6 @@
     <property name="hibernate.connection.pool_size">6</property>
     <property name="hibernate.hbm2ddl.auto">create-drop</property>
     <property name="hibernate.show_sql">true</property>
+    <mapping class="models.Usuarios" file="" jar="" package="" resource="mapping/MpUsuarios.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

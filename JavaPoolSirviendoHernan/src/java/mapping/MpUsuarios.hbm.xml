@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="models.Usuarios">
+        <id name="IdUsuarios" table="Usuarios">
+            <generator class="identity"/>
+        </id>
+        <property name="Documento" column="Documento" type="string"/>
+        <property name="Nombres" column="Nombres" type="string"/>
+        <property name="Apellidos" column="Apellidos" type="string"/>
+        <property name="Direccion" column="Direccion" type="string"/>
+        <property name="Email" column="Email" type="string"/>
+        <property name="Perfil" column="Perfil" type="string"/>
+    </class>
+</hibernate-mapping>

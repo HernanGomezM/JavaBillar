@@ -1,3 +1,10 @@
+<%-- 
+    Document   : Usuarios
+    Created on : 09-ago-2015, 15:31:38
+    Author     : GOMEZ MARQUEZ
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -97,8 +104,19 @@
 					 </div>
 				</div>
 				<div class="col_1_of_3 span_1_of_3">
-					<h2><span>Latest Events</span></h2>
-					  <h2>Hola Mundo</h2>
+					<h2><span>Usuarios Registrados</span></h2>
+					<table>
+					        <c:forEach items="${Usuarios}" var="Usua">
+					            <tr><td>${Usua.Documento}</td>
+					                <td>${Usua.Nombres}</td>
+					                <td>${Usua.Apellidos}</td>
+					                <td>${Usua.Direccion}</td>
+					                <td>${Usua.Email}</td>
+                                                        <td>${Usua.Perfil}</td>
+					                <td><a href="ServeUsua?u=update&i=${Usua.IdUsuarios}">Editar</a></td>
+					            </tr>
+					        </c:forEach>
+			        </table>
 				  </div>
 			   </div>
 	          </div>        
