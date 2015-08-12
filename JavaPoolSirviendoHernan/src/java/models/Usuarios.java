@@ -22,6 +22,10 @@ public class Usuarios implements Serializable{
     private String Email;
     private String Perfil;
    
+    public Usuarios(){
+        
+    }
+    
     public Usuarios(String Documento, String Nombres, String Apellidos, String Direccion, String Email, String Perfil) {
         this.Documento = Documento;
         this.Nombres = Nombres;

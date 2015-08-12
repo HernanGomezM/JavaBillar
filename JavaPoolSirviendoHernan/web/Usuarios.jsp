@@ -3,7 +3,8 @@
     Created on : 09-ago-2015, 15:31:38
     Author     : GOMEZ MARQUEZ
 --%>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html>
@@ -61,7 +62,7 @@
 	        		<div class="section group">
 				<div class="col_1_of_3 span_1_of_3">
 					<h2><span>Registro de Usuarios</span></h2>
-                                        <form action="ServeUsua?u=RegiUsua">
+                                        <form action="ServeUsua?u=RegiUsua"method="POST" id="AgrePer" name="AgrePer">
                                         <h2>Documento</h2><br>
 					<input id="txtes" type="text" name="Documento"/><br>
 					<h2>Nombres</h2><br>
@@ -84,48 +85,35 @@
 				<div class="col_1_of_3 span_1_of_3">
 					 <div class="menu_timmings">
 					 	 <ul>
-					 	 	<li>
-								<div class="txt1">Main Menu</div>
-								<div class="txt2 color1">12am - 12pm</div>
-							 </li>
-							 <li>
-								<div class="txt1">Beer Festival</div>
-								<div class="txt2 color2">9am - 8pm</div>
-							 </li>
-							 <li>
-								<div class="txt1">Live Music</div>
-								<div class="txt2 color3">7pm - 12pm</div>
-							 </li>
-							 <li>
-								<div class="txt1">Disco Dance</div>
-								<div class="txt2 color4">8pm - 2am</div>
-							 </li>
-					 	 </ul>
+                                                     <table>
+                                                         <tr style="background: #86AA00">
+                                                            <td><strong>Documento</strong></td> 
+                                                            <td><strong>Nombres</strong></td>
+                                                            <td><strong>Apellidos</strong></td>
+                                                            <td><strong>Direccion</strong></td>
+                                                            <td style="text-align: center"><strong>Email</strong></td>
+                                                            <td><strong>Perfil</strong></td>
+                                                        </tr>
+                                                    <c:forEach items="${Usuarios}" var="Usua">
+                                                        <tr style="background: #888">
+                                                        <td width="90">${Usua.documento}</td>
+                                                        <td width="90">${Usua.nombres}</td>
+                                                        <td width="90">${Usua.apellidos}</td>
+                                                        <td width="90">${Usua.direccion}</td>
+                                                        <td width="90">${Usua.email}</td>
+                                                        <td width="90">${Usua.perfil}</td
+                                                        <td><a href="ServeUsua?u=delete&i=${Usua.documento}" method="POST">Eliminar</a></td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                       </table>
+                                                 </ul>
 					 </div>
 				</div>
-				<div class="col_1_of_3 span_1_of_3">
-					<h2><span>Usuarios Registrados</span></h2>
-					<table>
-					        <c:forEach items="${Usuarios}" var="Usua">
-					            <tr><td>${Usua.Documento}</td>
-					                <td>${Usua.Nombres}</td>
-					                <td>${Usua.Apellidos}</td>
-					                <td>${Usua.Direccion}</td>
-					                <td>${Usua.Email}</td>
-                                                        <td>${Usua.Perfil}</td>
-					                <td><a href="ServeUsua?u=update&i=${Usua.IdUsuarios}">Editar</a></td>
-					            </tr>
-					        </c:forEach>
-			        </table>
-				  </div>
+				
 			   </div>
 	          </div>        
 	        </div>
-	          <div class="copy_right">
-	        	<div class="wrap">
-				  <p>Company Name © All rights Reseverd | Design by  <a href="http://w3layouts.com"> W3Layouts </a></p>
-		       </div>
-		   </div>
+	         
       </body>
  </html>
 

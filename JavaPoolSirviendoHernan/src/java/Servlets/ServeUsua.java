@@ -27,6 +27,7 @@ import org.hibernate.Transaction;
  */
 @WebServlet(name = "ServeUsua", urlPatterns = {"/ServeUsua"})
 public class ServeUsua extends HttpServlet {
+   
     private void RegiUsua(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             PrintWriter out = response.getWriter();
@@ -37,10 +38,10 @@ public class ServeUsua extends HttpServlet {
             s.save(usua);
             //Obtenemos la session del cliente
             HttpSession sh = request.getSession();
-            sh.setAttribute("Usuarios", usua);
+            sh.setAttribute("User", usua);
             tx.commit();
             s.close();
-            response.sendRedirect("Usuarios.html");
+            response.sendRedirect("ServeUsua?u=VerUsua");
     }
     private void VerUsua(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -52,7 +53,7 @@ public class ServeUsua extends HttpServlet {
        
         request.setAttribute("Usuarios", Usuario);
         s.close();
-        request.getRequestDispatcher("Usuarios.html").forward(request, response);
+        request.getRequestDispatcher("Usuarios.jsp").forward(request, response);
     }
     private void updateUsuario(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -72,8 +73,25 @@ public class ServeUsua extends HttpServlet {
         request.getRequestDispatcher("Usuarios.jsp").forward(request, response);
         
     }
-    
-    
+    private void DeleteUsuarios (HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query q = s.createQuery("DELETE c FROM Usuarios c WHERE Documento=?");
+        q.setInteger(0, Integer.parseInt(request.getParameter("i")));
+        
+        Usuarios celular = (Usuarios) q.uniqueResult();
+        s.close();
+        
+        HttpSession sh = request.getSession();
+        sh.setAttribute("BurarUsuario", celular);
+        
+        request.setAttribute("DelUsua", celular);
+        request.getRequestDispatcher("ServeUsua?u=VerUsua").forward(request, response);
+        
+        
+    }
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -99,6 +117,10 @@ public class ServeUsua extends HttpServlet {
         }else if(request.getParameter("u").equalsIgnoreCase("update")){
             
             updateUsuario(request,response); 
+            
+        }else if(request.getParameter("u").equalsIgnoreCase("delete")){
+            
+            DeleteUsuarios(request,response); 
         }
     }
 
