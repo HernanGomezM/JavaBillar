@@ -76,23 +76,18 @@ public class ServeUsua extends HttpServlet {
     private void DeleteUsuarios (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        
         Session s = HibernateUtil.getSessionFactory().openSession();
-        Query q = s.createQuery("DELETE c FROM Usuarios c WHERE Documento=?");
+        Query q = s.createQuery("DELETE Usuarios WHERE Documento=?");
         q.setInteger(0, Integer.parseInt(request.getParameter("i")));
         
-        Usuarios celular = (Usuarios) q.uniqueResult();
+        int celular = q.executeUpdate();
         s.close();
         
-        HttpSession sh = request.getSession();
-        sh.setAttribute("BurarUsuario", celular);
-        
-        request.setAttribute("DelUsua", celular);
+        HttpSession sh = request.getSession();      
         request.getRequestDispatcher("ServeUsua?u=VerUsua").forward(request, response);
         
         
     }
-    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
