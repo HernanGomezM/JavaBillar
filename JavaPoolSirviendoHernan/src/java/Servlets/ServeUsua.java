@@ -31,7 +31,18 @@ public class ServeUsua extends HttpServlet {
     private void RegiUsua(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             PrintWriter out = response.getWriter();
-            Usuarios usua = new Usuarios(request.getParameter("Documento"), request.getParameter("Nombres"),request.getParameter("Apellidos"),request.getParameter("Direccion"),request.getParameter("Email"),request.getParameter("Perfil"));
+            HttpSession session = request.getSession();
+            Usuarios usua;
+            if(session.getAttribute("ActualizarUsuario")!=null){
+                usua = (Usuarios) session.getAttribute("ActualizarUsuario");
+                usua.setDocumento(request.getParameter("Documento"));
+                usua.setNombres(request.getParameter("Nombres"));
+                usua.setApellidos(request.getParameter("Apellidos"));
+                usua.setDireccion(request.getParameter("Direccion"));
+                usua.setEmail(request.getParameter("Email"));
+                usua.setPerfil(request.getParameter("Perfil"));
+            }else
+            usua = new Usuarios(request.getParameter("Documento"), request.getParameter("Nombres"),request.getParameter("Apellidos"),request.getParameter("Direccion"),request.getParameter("Email"),request.getParameter("Perfil"));
             
             Session s = HibernateUtil.getSessionFactory().openSession();
             Transaction tx = s.beginTransaction();
@@ -60,7 +71,7 @@ public class ServeUsua extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         Session s = HibernateUtil.getSessionFactory().openSession();
-        Query q = s.createQuery("SELECT c FROM Usuarios c WHERE IdUsuarios=?");
+        Query q = s.createQuery("SELECT c FROM Usuarios c WHERE Documento=?");
         q.setInteger(0, Integer.parseInt(request.getParameter("i")));
         
         Usuarios celular = (Usuarios) q.uniqueResult();
@@ -81,6 +92,23 @@ public class ServeUsua extends HttpServlet {
         q.setInteger(0, Integer.parseInt(request.getParameter("i")));
         
         int celular = q.executeUpdate();
+        s.close();
+        
+        HttpSession sh = request.getSession();      
+        request.getRequestDispatcher("ServeUsua?u=VerUsua").forward(request, response);
+        
+        
+    }
+    private void UpdateUsuarios (HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        Session s = HibernateUtil.getSessionFactory().openSession();
+        Query query = s.createQuery("update Usuarios set Nombres = ?" +
+    				" where Documento = ?");
+        query.setParameter("Nombres", "Nombres");
+        query.setParameter("Documento", "Documento");
+        
+        int celular = query.executeUpdate();
         s.close();
         
         HttpSession sh = request.getSession();      
@@ -116,6 +144,9 @@ public class ServeUsua extends HttpServlet {
         }else if(request.getParameter("u").equalsIgnoreCase("delete")){
             
             DeleteUsuarios(request,response); 
+        }else if(request.getParameter("u").equalsIgnoreCase("up")){
+            
+            UpdateUsuarios(request,response); 
         }
     }
 

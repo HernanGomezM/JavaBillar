@@ -61,25 +61,38 @@
 	        <div class="main">	        	
 	        		<div class="section group">
 				<div class="col_1_of_3 span_1_of_3">
-					<h2><span>Registro de Usuarios</span></h2>
-                                        <form action="ServeUsua?u=RegiUsua"method="POST" id="AgrePer" name="AgrePer">
+                                     <% if (request.getParameter("ActualizarUsuario")!=null){ %>
+                                    <h2><span>Actualizar Usuarios</span></h2>
+                                    
+                                    <form action="ServeUsua?u=up" method="POST" id="AgrePer" name="AgrePer" var="UpUsua">
+                                        <% }else{%>
+                                    <h2><span>Registro de Usuarios</span></h2>
+                                    <form action="ServeUsua?u=RegiUsua"method="POST" id="AgrePer" name="AgrePer" var="UpUsua">
+                                    <% } %>
+					
+                                        
                                         <h2>Documento</h2><br>
-					<input id="txtes" type="text" name="Documento"/><br>
+                                        <input id="txtes" type="text" name="Documento" value="${UpUsua.documento}"/><br>
 					<h2>Nombres</h2><br>
-					<input id="txtes" type="text" name="Nombres"/><br>
+					<input id="txtes" type="text" name="Nombres" value="${UpUsua.nombres}"/><br>
 					<h2>Apellidos</h2><br>
-					<input id="txtes" type="text" name="Apellidos"/><br>
+					<input id="txtes" type="text" name="Apellidos" value="${UpUsua.apellidos}"/><br>
 					<h2>Direccion</h2><br>
-					<input id="txtes" type="text" name="Direccion"/><br>
+					<input id="txtes" type="text" name="Direccion" value="${UpUsua.direccion}"/><br>
 					<h2>Email</h2><br>
-					<input id="txtes"type="text" name="Email"/><br><br>
+					<input id="txtes"type="text" name="Email" value="${UpUsua.email}"/><br><br>
 					<h2>Perfil</h2><br>
 					<select id="txtes" name="Perfil">
 						<option value="Admin">Admin</option>
 						<option value="Mesero">Mesero</option>
 					</select>
 					<br><br>
-					<input type="submit" value="Registrar"/>
+                                    <% if (session.getAttribute("ActualizarUsuario")!=null){ %>
+                                    <input type="submit" value="Actualizar"/>
+                                    <% }else{%>
+                                    <input type="submit" value="Registrar"/>
+                                    <% } %>
+					
                                         </form>
 				</div>
 				<div class="col_1_of_3 span_1_of_3">
@@ -101,8 +114,9 @@
                                                         <td width="90">${Usua.apellidos}</td>
                                                         <td width="90">${Usua.direccion}</td>
                                                         <td width="90">${Usua.email}</td>
-                                                        <td width="90">${Usua.perfil}</td
-                                                        <td><a href="ServeUsua?u=delete&i=${Usua.documento}" method="POST">Eliminar</a></td>
+                                                        <td width="90">${Usua.perfil}</td>
+                                                        <td><a href="ServeUsua?u=delete&i=${Usua.documento}">Eliminar</a></td>
+                                                        <td><a href="ServeUsua?u=update&i=${Usua.documento}">Editar</a></td>
                                                         </tr>
                                                     </c:forEach>
                                                        </table>
