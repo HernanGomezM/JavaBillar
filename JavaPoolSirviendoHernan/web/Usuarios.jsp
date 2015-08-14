@@ -61,15 +61,20 @@
 	        <div class="main">	        	
 	        		<div class="section group">
 				<div class="col_1_of_3 span_1_of_3">
-                                     <% if (request.getParameter("ActualizarUsuario")!=null){ %>
-                                    <h2><span>Actualizar Usuarios</span></h2>
+                                    
+                                    <!--<h2><span>Actualizar Usuarios</span></h2>
                                     
                                     <form action="ServeUsua?u=up" method="POST" id="AgrePer" name="AgrePer" var="UpUsua">
-                                        <% }else{%>
-                                    <h2><span>Registro de Usuarios</span></h2>
+                                    -->
+                                    
+                                    
+                                    
                                     <form action="ServeUsua?u=RegiUsua"method="POST" id="AgrePer" name="AgrePer" var="UpUsua">
-                                    <% } %>
-					
+                                        <% if (session.getAttribute("ActualizarUsuario")!=null){ %>
+                                        <h2><span>Actualizar Usuarios</span></h2>
+                                        <% }else{%>
+                                        <h2><span>Registro de Usuarios</span></h2>
+                                        <% } %>
                                         
                                         <h2>Documento</h2><br>
                                         <input id="txtes" type="text" name="Documento" value="${UpUsua.documento}"/><br>
@@ -87,13 +92,8 @@
 						<option value="Mesero">Mesero</option>
 					</select>
 					<br><br>
-                                    <% if (session.getAttribute("ActualizarUsuario")!=null){ %>
-                                    <input type="submit" value="Actualizar"/>
-                                    <% }else{%>
                                     <input type="submit" value="Registrar"/>
-                                    <% } %>
-					
-                                        </form>
+                                    </form>
 				</div>
 				<div class="col_1_of_3 span_1_of_3">
 					 <div class="menu_timmings">
