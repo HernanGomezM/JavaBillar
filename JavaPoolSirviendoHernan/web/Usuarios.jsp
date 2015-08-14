@@ -87,44 +87,48 @@
 					<h2>Email</h2><br>
 					<input id="txtes"type="text" name="Email" value="${UpUsua.email}"/><br><br>
 					<h2>Perfil</h2><br>
-					<select id="txtes" name="Perfil">
+					<select id="txtes" name="Perfil" style="width: 170px;">
 						<option value="Admin">Admin</option>
 						<option value="Mesero">Mesero</option>
 					</select>
-					<br><br>
-                                    <input type="submit" value="Registrar"/>
+					<br><br><br>
+                                    <input type="submit" value="Registrar" style="width: 170px;"/>
                                     </form>
 				</div>
 				<div class="col_1_of_3 span_1_of_3">
-					 <div class="menu_timmings">
-					 	 <ul>
-                                                     <table>
-                                                         <tr style="background: #86AA00">
-                                                            <td><strong>Documento</strong></td> 
-                                                            <td><strong>Nombres</strong></td>
-                                                            <td><strong>Apellidos</strong></td>
-                                                            <td><strong>Direccion</strong></td>
-                                                            <td style="text-align: center"><strong>Email</strong></td>
-                                                            <td><strong>Perfil</strong></td>
-                                                        </tr>
-                                                    <c:forEach items="${Usuarios}" var="Usua">
-                                                        <tr style="background: #888">
-                                                        <td width="90">${Usua.documento}</td>
-                                                        <td width="90">${Usua.nombres}</td>
-                                                        <td width="90">${Usua.apellidos}</td>
-                                                        <td width="90">${Usua.direccion}</td>
-                                                        <td width="90">${Usua.email}</td>
-                                                        <td width="90">${Usua.perfil}</td>
-                                                        <td><a href="ServeUsua?u=delete&i=${Usua.documento}">Eliminar</a></td>
-                                                        <td><a href="ServeUsua?u=update&i=${Usua.documento}">Editar</a></td>
-                                                        </tr>
-                                                    </c:forEach>
-                                                       </table>
-                                                 </ul>
-					 </div>
-				</div>
-				
-			   </div>
+                                    <div class="menu_timmings">
+					 <ul>
+                                             <h2><span>Usuarios Registrados </span></h2>
+                                             <div class="CSSTableGenerator">
+                                             
+                                             <table>
+                                             <tr>
+                                                <td><strong>Documento</strong></td> 
+                                                <td><strong>Nombres</strong></td>
+                                                <td><strong>Apellidos</strong></td>
+                                                <td><strong>Direccion</strong></td>
+                                                <td><strong>Email</strong></td>
+                                                <td><strong>Perfil</strong></td>
+                                                <td colspan="2"><strong>Acciones</strong></td>
+                                             </tr>
+                                            <c:forEach items="${Usuarios}" var="Usua">
+                                                    <tr style="background: #888">
+                                                    <td width="90">${Usua.documento}</td>
+                                                    <td width="90">${Usua.nombres}</td>
+                                                    <td width="90">${Usua.apellidos}</td>
+                                                    <td width="90">${Usua.direccion}</td>
+                                                    <td width="90">${Usua.email}</td>
+                                                    <td width="90">${Usua.perfil}</td>
+                                                    <td><a href="ServeUsua?u=delete&i=${Usua.documento}">Eliminar</a></td>
+                                                    <td><a href="ServeUsua?u=update&i=${Usua.documento}">Editar</a></td>
+                                                    </tr>
+                                            </c:forEach>
+                                        </table>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+			</div>
 	          </div>        
 	        </div>
 	         
