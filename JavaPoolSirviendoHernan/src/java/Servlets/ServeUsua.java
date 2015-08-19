@@ -98,6 +98,35 @@ public class ServeUsua extends HttpServlet {
         HttpSession sh = request.getSession();      
         request.getRequestDispatcher("ServeUsua?u=VerUsua").forward(request, response);
     }
+     private void Login(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        HttpSession s = request.getSession(); 
+        Session sesion = HibernateUtil.getSessionFactory().openSession();
+                
+        String Usu, Doc;
+        Usu = request.getParameter("Email");
+        Doc = request.getParameter("Documento");
+        Query q = sesion.createQuery("SELECT u FROM Usuarios u WHERE u.Email=? AND u.Documento=?");
+        
+        q.setString(0, Usu);
+        q.setString(1, Doc);
+        
+        
+       Usuarios doc = (Usuarios) q.uniqueResult();
+        
+        
+        //deberíamos buscar el usuario en la base de datos, pero dado que se escapa de este tema, ponemos un ejemplo en el mismo código
+        if( (doc!=null)){
+            //si coincide usuario y password y además no hay sesión iniciada
+            s.setAttribute("usuario", Usu);
+            //redirijo a página con información de login exitoso
+            response.sendRedirect("Usuarios.jsp");
+            
+        }else{
+            response.sendRedirect("Login/index.html");
+        }
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -126,6 +155,9 @@ public class ServeUsua extends HttpServlet {
         }else if(request.getParameter("u").equalsIgnoreCase("delete")){
             
             DeleteUsuarios(request,response); 
+        }else if(request.getParameter("u").equalsIgnoreCase("ingresar")){
+            
+            Login(request,response); 
         }
     }
 

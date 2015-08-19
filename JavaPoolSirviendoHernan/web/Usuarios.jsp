@@ -1,11 +1,19 @@
-<%-- 
-    Document   : Usuarios
-    Created on : 09-ago-2015, 15:31:38
-    Author     : GOMEZ MARQUEZ
---%>
+
+<%@page import="models.Usuarios"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%if (session.getAttribute("usuario")==null) {
+        response.sendRedirect("Login/index.html");
+    }else{
+        Usuarios objUsuarios = (Usuarios) session.getAttribute("usuario");
+        String Per = objUsuarios.getPerfil();
+        if (Per != "Admin") {
+            response.sendRedirect("index.html");    
+            }
+    }
+}
+%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -60,15 +68,8 @@
 	       <div class="wrap">
 	        <div class="main">	        	
 	        		<div class="section group">
-				<div class="col_1_of_3 span_1_of_3">
                                     
-                                    <!--<h2><span>Actualizar Usuarios</span></h2>
-                                    
-                                    <form action="ServeUsua?u=up" method="POST" id="AgrePer" name="AgrePer" var="UpUsua">
-                                    -->
-                                    
-                                    
-                                    
+				<div class="col_1_of_3 span_1_of_3">  
                                     <form action="ServeUsua?u=RegiUsua"method="POST" id="AgrePer" name="AgrePer" var="UpUsua">
                                         <% if (session.getAttribute("ActualizarUsuario")!=null){ %>
                                         <h2><span>Actualizar Usuarios</span></h2>
@@ -98,6 +99,8 @@
 				<div class="col_1_of_3 span_1_of_3">
                                     <div class="menu_timmings">
 					 <ul>
+                                              
+                                              
                                              <h2><span>Usuarios Registrados </span></h2>
                                              <div class="CSSTableGenerator">
                                              
@@ -125,6 +128,9 @@
                                             </c:forEach>
                                         </table>
                                         </div>
+                                             
+                                        <h2><span>Registro de Usuarios</span></h2>
+                                        
                                     </ul>
                                 </div>
                             </div>
